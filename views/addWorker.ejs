@@ -1,0 +1,231 @@
+<html>
+
+<head>
+<meta charset="utf-8" />
+	
+	
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Bringo</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+
+
+    <link href="stylesheets/paper-dashboard.css" rel="stylesheet"/>
+
+    
+    <link href="stylesheets/themify-icons.css" rel="stylesheet">
+
+</head>
+
+<body>
+    
+<div class="wrapper">
+	<div class="sidebar" data-background-color="white" data-active-color="danger">
+
+   
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+             <center> <h3>BrinGo</h3></center>
+                
+            </div>
+
+            <ul class="nav">
+                <li >
+                    <a href="/bringo/inbox">
+                        <i class="ti-panel"></i>
+                        <p>inbox</p>
+                    </a>
+                </li>
+                <li >
+                        <a href="/bringo/faculty">
+                            <i class="ti-panel"></i>
+                            <p>add Faculty</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                            <a href="/bringo/addWorker">
+                                <i class="ti-panel"></i>
+                                <p>add Worker</p>
+                            </a>
+                        </li>
+                    <li >
+                        <a href="/bringo/arrangement">
+                            <i class="ti-panel"></i>
+                            <p>visitor Details</p>
+                        </a>
+                    </li>
+
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
+		<nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Add Worker</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                   
+                </div>
+            </div>
+        </nav>
+
+
+       
+      
+      
+          <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card">
+                            <div class="header">
+                                    <h4 class="title"><font color="orange">Worker Details</font><i class="ti-filter"></i></h4><br>
+                                        <input type="text" id="myInput" class="form-control border-input" onkeyup="myFunction()" placeholder="Search by name.." title="Type in a name">
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                        
+                              <table class="table table-striped" id="myTable">
+                                            <thead>
+                                                <th>name</th>
+                                                <th>dep</th>
+                                                <th>email</th>
+                                                <th>P.No</th>
+                                                
+                                                <th>delete</th>
+                                           
+                                            </thead>
+                                            <tbody>
+                                                <% for(var i=0; i < data.length; i++) { %>
+                                               <tr>
+                                        
+                                                 <td><%= data[i].newfacultyname%></td>
+                                                 <td><%= data[i].newfacultydepartement%></td>
+                                                 <td><%= data[i].newfacultyemail%></td>
+                                                 <td><%= data[i].newfacultyphoneno%></td>
+                                                 
+                                                 <td><a href="/bringo/faculty/delete?id=<%=data[i]._id%>">delete</a></td>
+                                                 
+                                        
+                                               </tr>
+                                            <% } %>
+                                              </tbody>
+                                        
+                                            </table>
+                            </div>
+                        </div>
+        </div>
+                       
+          <div class="col-lg-11 col-md-9">
+                        <div class="card">
+                            <div class="header">
+                                    <h4 class="title"><font color="orange"> Add Worker</font> <i class="ti-user"></i></h4><br>
+                            </div>
+                            <div class="content">
+                                    <form action="/bringo/faculty/add" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text"  name="workerName" id="name" placeholder="Name" class="form-control border-input" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text"  name="workerAddress" id="dep" placeholder="Departement"  class="form-control border-input" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                    <label>contact</label>
+                                                    <input type="text"  placeholder="phoneno" name="workerContact"  pattern="[6789][0-9]{8}" class="form-control border-input" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                    <label>Alt contact</label>
+                                                    <input type="text"   name="workerAltContact" placeholder="phoneno" pattern="[6789][0-9]{8}"  id="phoneno" class="form-control border-input">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                                <div class="form-group">
+                                                        <label>DOB</label>
+                                                        <input type="date"   name="workerDob"  class="form-control border-input">
+                                                </div>
+                                            </div>
+                                        <div class="col-md-4">
+                                                <div class="form-group">
+                                                        <label>Join Date</label>
+                                                        <input type="date"   name="workerJoinDate"  class="form-control border-input">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                    <div class="form-group">
+                                                            <label>License No.</label>
+                                                            <input type="text"   name="workerLicense" placeholder="License No." class="form-control border-input">
+                                                    </div>
+                                                </div>
+                                            
+                                    </div>
+
+                                    <input type="submit" class="btn btn-info btn-fill btn-wd"   value="addMember"  >
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+                               
+                   
+            
+            
+
+   </div>
+
+          
+    
+                 
+</body>
+    <script src="javascripts/serachElement.js"></script> 
+    <script src="javascripts/jquery.min.js" type="text/javascript"></script>
+	<script src="javascripts/bootstrap.min.js" type="text/javascript"></script>
+
+	
+	<script src="javascripts/bootstrap-checkbox-radio.js"></script>
+
+	<script src="javascripts/chartist.min.js"></script>
+
+    <script src="javascripts/bootstrap-notify.js"></script>
+
+  
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+	<script src="javascripts/paper-dashboard.js"></script>
+
+	
+	<script src="javascripts/demo.js"></script>
+
+
+</html>

@@ -1,0 +1,930 @@
+<html>
+
+<head>
+        <style>
+                * {
+                    box-sizing: border-box;
+                }
+                body {
+                    margin:50px 400px; padding:0px;
+                   
+                    
+                }
+                input[type=text], select, textarea {
+                    width: 50%;
+                    padding: 12px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    resize: vertical;
+                }
+                
+                label {
+                    padding: 12px 12px 12px 0;
+                    display: inline-block;
+                }
+                
+                input[type=submit] {
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 12px 20px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    float: right;
+                }
+                
+                input[type=submit]:hover {
+                    background-color: #45a049;
+                }
+                
+                .container {
+                    border-radius: 5px;
+                    background-color: #f2f2f2;
+                    padding: 20px;
+                }
+                
+                .col-25 {
+                    float: left;
+                    width: 25%;
+                    margin-top: 6px;
+                }
+                
+                .col-75 {
+                    float: left;
+                    width: 75%;
+                    margin-top: 6px;
+                }
+                
+                /* Clear floats after the columns */
+                .row:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+                
+                /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+                @media screen and (max-width: 600px) {
+                    .col-25, .col-75, input[type=submit] {
+                        width: 100%;
+                        margin-top: 0;
+                    }
+                }
+                </style>
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Bringo</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link href="stylesheets/paper-dashboard.css" rel="stylesheet"/>
+    <link href="stylesheets/themify-icons.css" rel="stylesheet">
+</head>
+<body>
+    
+<div class="wrapper">
+	<div class="sidebar" data-background-color="white" data-active-color="danger">
+        <div class="sidebar-wrapper">
+            <div class="logo">
+             <center> <h3>BrinGo</h3></center>
+            </div>
+                <ul class="nav">
+                    
+                <li >
+                   <center> <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m1()">Visitor/Guest Details</button></center><br>
+                </li>
+                 <li >
+                <center><button type="button" class="btn btn-info btn-fill btn-wd" onclick="m2()">Pickup</button></li></center><br>
+                </li>
+                <li >
+                   <center> <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m3()">Departure</button>    </center>  <br> 
+                </li>
+                <li >
+                   <center>  <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m4()">Meals</button></center><br>
+                </li>
+                <li >
+                  <center>  <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m5()">Accomodation</button>  </li></center> <br> 
+                </li>
+                <li >
+                  <center>  <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m6()">Confirm and Submit</button> </center>  <br>   
+                </li>
+            </ul>
+    	</div>
+    </div>
+    
+    <div class="main-panel">
+		<nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Visitor Details</a><br>
+                    
+                </div>
+              
+            </div>
+        </nav>
+        <div class="col-sm-8 col-sm-offset-2">
+                <div class="jumbotron text-center">
+                      <img src="image/chitkaraLogo.png" alt="logo" width="200" height="100">
+                </div>
+     <form action="/bringo/send" method="post" onload="addFields">
+
+        <!-------------------------------------------------------------------------------------DIV TAG WITH ID 01 -------------------------------------------------------------------------------------------------------->
+                <div id='id01' style="display: block">
+                            <h2> Visitor Details</h2>
+                            <div class="row">
+                                <div class="col-25">
+                                    
+                                    <label>No of Visitors</label></div>
+
+                    <div class="col-75"> <input type="text" name="noofvisitors" value="<%=data[0].noofvisitors %>" id="noofvisitors"  class="form-control border-input" readonly></div></div>
+                       
+            <div id="containers" class="form-group"></div>
+          
+                            <% for(var i=0; i < data[0].Requester.length; i++) { %>
+                             <div class="row"><div class="col-25">   <label>person <%=i+1%> name</label> </div>
+                          <div class="col-75"><input type="text" name="firstname" class="form-control border-input" value='<%= data[0].Requester[i].firstname %>'></div></div>
+                          <div class="row"><div class="col-25"> <label>person <%=i+1%> email</label> </div>
+                           <div class="col-75"> <input type="email" name="email" class="form-control border-input" value='<%= data[0].Requester[i].email %>'></div></div>
+                            <div class="row"><div class="col-25">  <label>person <%=i+1%> contact</label> </div>
+                          <div class="col-75">  <input type="text" name="contact" class="form-control border-input" value='<%= data[0].Requester[i].contact %>'></div></div>
+                           <% } %>
+                                   
+           
+                         <!--   <div class="row">
+                                <div class="col-25"> <label>Mr/Ms/Mrs</label></div>
+                                                         <div class="col-md-2">
+                                                         <select name="gender"  class="form-control border-input"> 
+                                                          <option value="Mrs">Mr</option>
+                                                          <option value="Ms">Ms</option>
+                                                          <option value="Mrs">Mrs</option>
+                                                          <option value="others">others</option>
+                                                        </select> 
+                                                     </div>
+                                             </div>
+                                            <div class="row">
+                                                    <div class="col-25"><label>First Name<font color="red">*</font></label></div>
+                                                    <div class="col-75"><input type="text"  name="firstname" value="<%=data[0].firstname %>" placeholder="eg - Johnny" class="form-control border-input" ></div>
+                                            </div>
+                                             <div class="row">
+                                                    <div class="col-25"> <label> Last Name<font color="red">*</font></label></div>
+                                                    <div class="col-75"><input type="text"  name="lastname" value="<%=data[0].lastname %>" placeholder="eg - Bonzella" class="form-control border-input" > </div>
+                                            </div>
+                                    <div class="row">--><div class="row">
+                                        <div class="col-25"><label>Organization<font color="red">*</font></label></div>
+                                        <div class="col-75"><input type="text"  name="organisation" value="<%=data[0].organisation %>" placeholder="eg - Google" class="form-control border-input" required></div>
+                                </div>
+                                          <!--  <div class="row">
+                                                    <div class="col-25"> <label>Contact<font color="red">*</font></label></div>
+                                                    <div class="col-75"><input type="number"  name="contact" value="<%=data[0].contact %>" placeholder="eg - 9876543210" class="form-control border-input" required></div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-25"><label>Alt. Contact</label></div>
+                                                    <div class="col-75">  <input type="number"  name="altcontact" value="<%=data[0].altcontact %>" class="form-control border-input" ></div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-25"> <label>Email<font color="red">*</font></label></div>
+                                                    <div class="col-75"> <input type="email"  name="email" value="<%=data[0].email %>" placeholder="abc.xyz@def.com" class="form-control border-input" required></div>
+                                            </div>--><br>
+                                            <div class="row">
+                                                    <div class="col-25"> <label>Arrival date<font color="red">*</font></label></div>
+                                                    <div class="col-75"> <input type="date"   name="arrivaldate" value="<%=data[0].arrivaldate %>" placeholder="date"  class="form-control border-input" required></div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-25"><label>Arrival time<font color="red">*</font></label></div>
+                                                  <div class="col-75"><input type="time"   name="arrivaltime" value="<%=data[0].arrivaltime %>" placeholder="date"  class="form-control border-input" required></div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col-25"><label>Purpose of visit<font color="red">*</font></label></div>
+                                                    <div class="col-75"><textarea rows="4" cols="80" resize:none name="Purpose" value="<%=data[0].Purpose %>"></textarea></div>
+                                            </div>          
+                        </div>
+
+    <!---------------------------------------------------------------              DIV TAG WITH ID= ID02                     -------------------------->
+             <div id="id02" style="display: none">
+                
+                    
+                       <!--   <div class="row">
+                                    <div class="col-25"><label>departement</label></div>
+                              <div class="col-75"><input type="text"  name="departement" placeholder="departement" class="form-control border-input" > </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-25"><label>contact number</label></div>
+                                  <div class="col-75"> <input type="number"  name="contact number" placeholder="contact number" class="form-control border-input" ></div>
+                            </div>-->
+                            <div class="row">
+                                    <div class="col-25"> <label>Pick Required<font color="red">*</font></label></div>
+                                   <div class="col-75"> <select name="pickupreq"  value="<%=data[0].pickupreq %>" class="form-control border-input" id="pickup" onchange="myf()"> 
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select></div>
+                            </div>
+                            <script>
+                                function myf(){
+                                    var a = document.getElementById("pickup").value;
+        if(a=="Yes")
+        document.getElementById('idpickup').style.display='block';
+        else
+        document.getElementById('idpickup').style.display='none';}
+                            </script>
+                            <div id="idpickup" style="display: none">
+                                    <div class="row">
+                                            <div class="col-25">   <label>Pickup Info</label></div>
+                               <div class="col-75"> <input list="pick" id="pic" name="pickupinfo" value="<%=data[0].pickupinfo %>"  class="form-control border-input"> 
+                                    <datalist id="pick">        
+                                <option value="Chandigarh Airport">
+                                         <option value="Chandigarh Railway">
+                                         <option value="Rajpura Railway station">
+                                         <option value="Ambala cantt Railway station">
+                                        </datalist> </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-25"><label>Pickup Location</label></div>
+                                            <div class="col-75"><textarea rows="4" cols="80" resize:none name="pickuplocation" ></textarea></div>
+                                    </div>    
+                                    
+                                   <hr color="grey" size="30">
+
+                                      <div class="row">
+                                            <div class="col-25"> <label>Transport Cordinator<font color="red">*</font></label></div>
+                                 <div class="col-75"> <input list="Transport"  name="pickuptransportcoordinator"  id="my" class="form-control border-input" oninput="details(this.value)"> 
+                                    <datalist id="Transport">    
+                                    <option value="Col. Chanchal Jhamb">
+                                         <option value="Anubhav kapil">
+                                         <option value="Umesh kumar">
+                                         <option value="Satish Kumar">
+                                        
+                                         </datalist></div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-25"> <label>Contact<font color="red">*</font></label></div>
+
+                            <div class="col-75"><input list="con" name="pickuptransportcoordinatorphoneno"  placeholder="phone no" class="form-control border-input" id="demo1" >
+                            <datalist id="con">
+                                <option value="9797419929">
+                                        <option value="8143300001">
+                                                <option value="9501105640">
+                                                        <option value="7696993019">
+                                                
+                            </datalist></div>
+                        </div>
+                        <script>
+                                function details(value)
+                                {
+                                    if(value =="Col. Chanchal Jhamb")
+                                        document.getElementById("demo1").value ="9797419929 ";
+                                    if(value =="Anubhav kapil ")
+                                        document.getElementById(" demo1").value = "8143300001 ";
+                                    if(value =="Umesh kumar ")
+                                        document.getElementById("demo1 ").value = "9501105640";
+                                    if(value =="Satish Kumar ")
+                                        document.getElementById(" demo1").value = "7696993019";
+                                    
+                                    
+                                }
+                                function pickup(val){
+                                    document.getElementsByName("pickupreq");
+                                    if(val=="No")
+                                    document.getElementById('idpickup').style.display='block';
+                                }
+
+                                </script>
+                                <hr color="grey" size="30">
+                                <div class="row">
+                                        <div class="col-25"><label>Pickup Person<font color="red">*</font></label></div>
+                                    <div class="col-75"> <select name="pickperson"  id="mySelect" onchange="myFunction()" class="form-control border-input"> 
+                                           <option value="123456789">abc</option>
+                                           <option value="987642525">cde</option>
+                                           <option value="4563778388">efg</option>
+                                            <option value="73666664364">cde</option>
+                                            <option value="13242435">5</option>            
+                                            <option value="444445455t4">6</option>
+                                           <option value="444t45533">7</option>
+                                           <option value="24345545555">8</option>
+                                     </select></div>
+                                    </div>
+                                     <div class="row">
+                                            <div class="col-25"><label>Contact<font color="red">*</font></label></div>
+<div class="col-75"><input type="text"  name="pickuppersonphoneno"  placeholder="phoneno" class="form-control border-input" id="demo" value="" required></div></div>
+            
+<div class="col-md-4">
+        <div class="form-group">
+                  <label>Vehicle type<font color="red">*</font></label>
+                  <select name="pickupvehicletype"   class="form-control border-input"> 
+      <option >ABC</option>
+      <option >CDE</option>
+      <option >GHI</option>
+
+    </select>
+                
+              </div>
+          </div>
+         <div class="col-md-4">
+              <div class="form-group">
+                 
+                <label>Capacity<font color="red">*</font></label>
+                             <select name="pickupvehiclecapacity"  class="form-control border-input"> 
+      <option>1</option>
+      <option>2</option>
+      <option >3</option>
+       <option >4</option>
+        <option >5</option>
+       <option >6</option>
+      <option >7</option>
+     
+    </select>
+                 
+              </div>
+          </div>
+        <div class="col-md-4">
+              <div class="form-group">
+                  
+                   <label>Vehicle No<font color="red">*</font></label>
+                             <select name="pickupvehiclenumber"   class="form-control border-input"> 
+      <option >123</option>
+      <option >455</option>
+      <option >678</option>
+
+    </select>
+              </div>
+          </div>
+
+
+
+
+
+
+    <hr color="grey" size="30">
+ <h5>Accompanied by :(pick up)</h5>
+        <div class="row">
+            <div class="col-25">
+                <label>Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="accompaniedfullname"  placeholder="Person accompanied by" class="form-control border-input">
+            </div>
+        </div>
+        
+            <div class="row">
+                <div class="col-25">
+                    <label>Contact Numner</label></div><div class="col-75">
+                <input type="text" name="accompaniedcontactno" placeholder="Contact number of person accompanied by" class="form-control border-input">
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Other Details:</label>
+            </div><div class="col-75">
+                <input type="text" name="accompanieddepartment" placeholder="names of another person accompanied and other info"></div></div>
+`
+            </div>
+</div>
+
+        <!--------------------------------------------------------------DIV TAG WITH ID = ID03------------------------------------------------------------------->
+              <div id='id03' style="display:none"> 
+                    
+                    <div class="row">
+                            <div class="col-25"> <label>Deaparture Date<font color="red">*</font></label></div>
+                            <div class="col-75"><input type="date"  name="departuredate"  value="<%=data[0].departuredate %>" placeholder="deaparture date" class="form-control border-input" ></div></div>
+                            <div class="row">
+                                    <div class="col-25"> <label>Deaparture time<font color="red">*</font></label></div>
+                  <div class="col-75">        <input type="time"  name="departuretime" placeholder="deaparture time" class="form-control border-input" ></div></div>
+                  <div class="row">
+                        <div class="col-25"> <label>Drop Required<font color="red">*</font></label></div>
+                             <div class="col-75" > <select name="dropreq"   value="<%=data[0].dropreq %>" onchange="myd()" class="form-control border-input" id="idddrop"> 
+                             <option value="Yes">Yes</option>
+                             <option value="No">No</option>
+                                   </select></div></div>
+                                   <script>
+                                        function myd(){
+                                    var a = document.getElementById("idddrop").value;
+        if(a=="Yes")
+        document.getElementById("03").style.display='block';
+        else
+        document.getElementById("03").style.display='none';}
+                                   </script>
+                                   <div id="03" style="display: none">
+                                   <div class="row">
+                                        <div class="col-25">   <label>Drop info<font color="red">*</font></label></div>
+                      <div class="col-75"> <input list="dropp" name="dropinfo"   value="<%=data[0].dropinfo %>" class="form-control border-input">
+                        <datalist id="dropp">
+                             <option value="Chandigarh Airport">
+                             <option value="Chandigarh Railway">
+                             <option value="Rajpura Railway station">
+                              <option value="Ambala cantt Railway station">
+                              </datalist></div>
+                                   </div>
+                               
+                                
+                                  
+
+                            <hr color="grey" size="30">
+
+                            <div class="row">
+                                    <div class="col-25">    <label>Drop Transport cordinator<font color="red">*</font></label></div>
+                                  <div class="col-75"> <select name="droptransportcoordinator" id="mySelect1" onchange="myFunction1()" class="form-control border-input"> 
+                         <option value="123456789">abc</option>
+                         <option value="987642525">cde</option>
+                         <option value="4563778388">efg</option>
+                          <option value="73666664364">cde</option>
+                           <option value="13242435">5</option>
+                          <option value="444445455t4">6</option>
+                         <option value="444t45533">7</option>
+                          <option value="24345545555">8</option>
+
+                       </select></div></div>
+
+                                  
+                            
+                       <div class="row">
+                            <div class="col-25"> <label>Contact<font color="red">*</font></label></div>
+                        <script>
+function myFunction1() {
+var x = document.getElementById("mySelect1").value;
+document.getElementById("demo1").value = x;
+}
+</script>
+
+
+                                             <div class="col-75">  <input type="text"  name="droptransportphoneno" placeholder="phone no" class="form-control border-input" id="demo1" value="" required></div></div>
+                         
+
+                         <hr color="grey" size="30">
+                         <div class="row">
+                                <div class="col-25">  <label>Drop person<font color="red">*</font></label></div>
+                           <div class="col-75"> <select name="dropperson" id="mySelect2" onchange="myFunction2()" class="form-control border-input"> 
+                         <option value="123456789">abc</option>
+                         <option value="987642525">cde</option>
+                         <option value="4563778388">efg</option>
+                          <option value="73666664364">cde</option>
+                           <option value="13242435">5</option>
+                          <option value="444445455t4">6</option>
+                         <option value="444t45533">7</option>
+                          <option value="24345545555">8</option>
+
+                       </select></div></div>
+
+                       <script>
+                        function myFunction2() {
+                        var x = document.getElementById("mySelect2").value;
+                        document.getElementById("demo1").value = x;
+                        }
+                        </script>
+                            
+                       <div class="row">
+                            <div class="col-25">    <label>Contact<font color="red">*</font></label></div>
+
+                        <script>
+function myFunction() {
+var x = document.getElementById("mySelect").value;
+document.getElementById("demo").value = x;
+}
+</script>
+
+
+<div class="col-75"><input type="text"  name="droppersonphoneno" placeholder="phone no" class="form-control border-input" id="demo" value="" required></div></div>
+                              <div class="col-md-4">
+                               <div class="form-group">
+                                         <label>Vehicle type<font color="red">*</font></label>
+                                         <select name="dropvehicletype"  class="form-control border-input"> 
+                             <option >ABC</option> function myf(){
+                                    var a = document.getElementById("pickup").value;
+        if(a=="Yes")
+        document.getElementById('idpickup').style.display='block';
+        else
+        document.getElementById('idpickup').style.display='none';}
+                             <option >CDE</option> function myf(){
+                                    var a = document.getElementById("pickup").value;
+        if(a=="Yes")
+        document.getElementById('idpickup').style.display='block';
+        else
+        document.getElementById('idpickup').style.display='none';}
+                             <option >GHI</option> function myf(){
+                                    var a = document.getElementById("pickup").value;
+        if(a=="Yes")
+        document.getElementById('idpickup').style.display='block';
+        else
+        document.getElementById('idpickup').style.display='none';}
+                 
+                           </select>
+                                       
+                                     </div>
+                                 </div>
+                                <div class="col-md-4">
+                                     <div class="form-group">
+                                        
+                                       <label>Capacity<font color="red">*</font></label>
+                                                    <select name="dropvehiclecapacity"  class="form-control border-input"> 
+                             <option>1</option>
+                             <option>2</option>
+                             <option >3</option>
+                              <option >4</option>
+                               <option >5</option>
+                              <option >6</option>
+                             <option >7</option>
+                            
+                           </select>
+                                        
+                                     </div>
+                                 </div>
+                               <div class="col-md-4">
+                                     <div class="form-group">
+                                         
+                                          <label>Vehicle No<font color="red">*</font></label>
+                                                    <select name="dropvehiclenumber"  class="form-control border-input"> 
+                             <option >123</option>
+                             <option >455</option>
+                             <option >678</option>
+                 
+                           </select>
+                                     </div>
+                                 </div>
+                                 <hr color="grey" size="30">
+<h5>Accompanied by :(pick up)</h5>
+ 
+        <div class="row">
+            <div class="col-25">
+                <label>Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="accompaniedfullname" placeholder="Person accompanied by">
+            </div>
+        </div>
+      
+            <div class="row">
+                <div class="col-25">
+                    <label>Contact Numner</label></div><div class="col-75">
+                <input type="text" name="accompaniedcontactno" placeholder="Contact number of person accompanied by">
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-25">
+                    <label>Other Details:</label>
+                </div><div class="col-75">
+                    <input type="text" name="accompanieddepartment" placeholder="names of another person accompanied and other info"></div></div><!--
+<br><input type="button" onclick="newrow(this)" value="New" class="button-new"><tab></tab><
+<input type="button" onclick="deleterow(this)" value="Delete" style="display: none"class="button-delete"> <br><br>--></div></div>
+            <!-- --------------------------------------------------------------------------------------------------- DIV TAG WITH ID = ID 04------------------------------------------------------------------------------------------------------------->
+          <div id='id04' style="display: none">
+             <div class="row">
+                                    <div class="col-25"> <label>Meal Required<font color="red">*</font></label></div>
+                                   <div class="col-75"> <select name="meal"  value="<%=data[0].meal %>" class="form-control border-input" id="meal" onchange="myfunc()"> 
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select></div>
+                            </div>
+                           
+              
+              <script>
+                                function myfunc(){
+                                    var a = document.getElementById("meal").value;
+        if(a=="Yes")
+        document.getElementById('idmeals').style.display='block';
+        else
+        document.getElementById('idmeals').style.display='none';}
+                            </script>
+                            <div id="idmeals" style="display: none">
+                            
+        <div class="form-group">
+            <label>Date: </label>
+            <input type="date" value="date" class="textBox"><br><br>
+        <div class="form-group">
+            <fieldset>
+                <legend>Morning: </legend>
+                Morning Tea : <br>
+                <div class="col-25"><input type="checkbox" name="morningTea" value="morningTea">Tea<br></div>
+                <div class="col-75"><input type="checkbox" name="teaAndSnacks" value="teaAndSnacks">Tea and Snacks<br><br></div>
+                
+                <label>Venue : </label>
+                <input type="text" name="location" placeholder="Venue Name" class="textBox"><br>
+                <label class="detailTitle">Person Responsible: </label>
+                <input type="text" name="personResponsible" placeholder="Full Name" class="textBox"> <br>
+                
+                Acompanied By:<br>
+                <label>Name:</label>
+                <input type="text" name="fullmame" placeholder="Full Name" class="textBox"><br>
+                <label class="detailTitle">Department:</label>
+                <input type="text" name="department" placeholder="Department Name" class="textBox"><br>
+                <label class="detailTitle">Contact: </label>
+                <input type="number" name="number" placeholder="Contact Number" maxlength="10" class="textBox"><br><br>
+                
+                <input type="checkbox" name="breakfast">Breakfast<br><br>
+                
+                <label>Venue : </label>
+                <input type="text" name="location" placeholder="Venue Name" class="textBox"><br>
+                <label class="detailTitle">Person Responsible: </label>
+                <input type="text" name="personResponsible" placeholder="Full Name" class="textBox"> <br>
+                
+                Acompanied By:<br>
+                <label>Name:</label>
+                <input type="text" name="fullmame" placeholder="Full Name" class="textBox"><br>
+                <label class="detailTitle">Department:</label>
+                <input type="text" name="department" placeholder="Department Name" class="textBox"><br>
+                <label class="detailTitle">Contact: </label>
+                <input type="number" name="number" placeholder="Contact Number" maxlength="10" class="textBox"><br><br>
+                
+            </fieldset>
+        </div>
+        <br>
+        <div class="form-group">
+            <fieldset>
+                <legend>AfterNoon: </legend>
+                Tea : <br>
+                <input type="checkbox" name="morningTea" value="morningTea">Tea<br>
+                <input type="checkbox" name="teaAndSnacks" value="teaAndSnacks">Tea and Snacks<br><br>
+                
+                <label>Venue : </label>
+                <input type="text" name="location" placeholder="Venue Name" class="textBox"><br>
+                <label class="detailTitle">Person Responsible: </label>
+                <input type="text" name="personResponsible" placeholder="Full Name" class="textBox"> <br>
+                
+                Acompanied By:<br>
+                <label>Name:</label>
+                <input type="text" name="fullmame" placeholder="Full Name" class="textBox"><br>
+                <label class="detailTitle">Department:</label>
+                <input type="text" name="department" placeholder="Department Name" class="textBox"><br>
+                <label class="detailTitle">Contact: </label>
+                <input type="number" name="number" placeholder="Contact Number" maxlength="10" class="textBox"><br><br>
+                
+                
+                <input type="checkbox" name="lunch">Lunch<br><br>
+                
+            </fieldset>
+        </div>
+        <br>
+        <div class="form-group">
+            <fieldset>
+                <legend>Evening: </legend>
+                Tea : <br>
+                <input type="checkbox" name="morningTea" value="morningTea">Tea<br>
+                <input type="checkbox" name="teaAndSnacks" value="teaAndSnacks">Tea and Snacks<br><br>
+                
+                <label>Venue : </label>
+                <input type="text" name="location" placeholder="Venue Name" class="textBox"><br>
+                <label class="detailTitle">Person Responsible: </label>
+                <input type="text" name="personResponsible" placeholder="Full Name" class="textBox"> <br>
+                
+                Acompanied By:<br>
+                <label>Name:</label>
+                <input type="text" name="fullmame" placeholder="Full Name" class="textBox"><br>
+                <label class="detailTitle">Department:</label>
+                <input type="text" name="department" placeholder="Department Name" class="textBox"><br>
+                <label class="detailTitle">Contact: </label>
+                <input type="number" name="number" placeholder="Contact Number" maxlength="10" class="textBox"><br><br>
+                
+                
+                <input type="checkbox" name="dinner">Dinner<br><br>
+                
+            </fieldset>
+        </div>
+        <br>
+
+    </div>
+
+                     
+</div>
+                                </div>
+                    <!----------------------------------------------------------------------div tag with id 05 ----------------------------------------------------------------------------------------------------------------------->
+    <div id='id05' style="display:none">
+                                      
+
+
+<div class="form-group">
+             <div class="row">
+                    <div class="col-25">
+                            <label for="roomtype">Stay(Outside University) :</label>
+                      </div>
+                      <div class="col-75">
+                            <textarea rows="4" cols="80" resize="none" name="purpose">
+                                </textarea>                      
+                            </div>
+                   <div class="col-25">
+                         <label for="roomtype">Room Type :</label>
+                   </div>
+                   <div class="col-75">
+                     <input type="text" id="roomtype" name="firstname" placeholder="Enter type of room you want..">
+                   </div>
+             </div>
+             <div class="row">
+                  <div class="col-25">
+                       <label for="roomno">Room no :</label>
+                  </div>
+                  <div class="col-75">
+                      <input type="text" id="roomno" placeholder="Enter room no..">
+                  </div>
+             </div>
+             <div class="row">
+                  <div class="col-25">
+                        <label for="buildingname">Building Name :</label>
+                  </div>
+                  <div class="col-75">
+                  <input type="text" id="roomno" placeholder="Name of building..">
+                  </div>
+              </div>
+              <div class="row">
+                    <div class="col-25">
+                        <label>Check In Date :</label>
+                    </div>
+                <div class="col-75">
+              <input type="date" name="departuredate" value="date" required>
+             </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+          <label>Check-in Time:</label>
+      </div>
+      <div class="col-75">
+    
+        <input type="time" name="checkintime" required>
+      </div>
+    </div>
+    
+     <div class="row">
+      <div class="col-25">
+         <label>Check Out Date :</label>
+      </div>
+      <div class="col-75">
+     
+            <input type="date" name="checkoutdate" value="date" required>
+      </div>
+    </div>
+    
+     <div class="row">
+      <div class="col-25">    
+          <label>Check-out-time  </label>
+      </div>
+      <div class="col-75">   ;
+     
+            <input type="time" name="checkouttime">  
+      </div>
+    </div>
+   
+ 
+    <div class="row">
+            <div class="row" >
+                <div class="col-25">
+            <label>Name :</label>
+        </div>
+            <div class="col-75">
+            <input type="text" name="accompaniedfullname" placeholder="Full name.. " required>
+            </div>
+        </div>
+          <div class="row" >
+                <div class="col-25">
+            <label>Contact Number :</label>
+        </div>
+            <div class="col-75">
+            <input type="text" name="accompaniedcontactno" placeholder="Contact number " required>
+            </div>
+        </div>
+       <div class="row">
+        <input type="button" onclick="newrow(this)" value="Add More.." class="button-new"><input type="button" onclick="deleterow(this)" value="Delete" style="display: none"class="button-delete"> <br><br></div></div>
+       
+    
+    </div>
+    <div id="id06" style="display: none">
+        <div class="row">
+      <input type="submit" value="Submit">
+    </div></div>
+
+</div>
+             </form></div></div></div>
+
+             <script>
+                    function newrow(id){
+                            var row= id.parentNode; 
+                               var box=document.getElementById("box");
+                           var dnew=row.cloneNode(true);
+                           box.appendChild(dnew);
+                             var deletelist= box.getElementsByClassName("button-delete");
+                           var display="none";
+                           if(deletelist.length>1){
+                               display="";}
+                           for(i=0;i<deletelist.length;i++){
+                               deletelist[i].style.display= display; 
+                           }
+                           }
+                           
+                       
+                           function deleterow(id){
+                               var row= id.parentNode; 
+                               var box=document.getElementById("box");
+                               box.removeChild(row);
+                               var deletelist= box.getElementsByClassName("button-delete");
+                               if(deletelist.length<2){
+                                   deletelist[0].style.display="none"; } 
+                           }
+                       
+                           function m1()
+    {
+        document.getElementById('id01').style.display='block';
+        document.getElementById('id02').style.display='none';
+        document.getElementById('id03').style.display='none';
+        document.getElementById('id04').style.display='none';
+        document.getElementById('id05').style.display='none';
+        document.getElementById('id06').style.display='none';
+
+    }
+    function m2()
+    {
+        document.getElementById('id01').style.display='none';
+        document.getElementById('id02').style.display='block';
+        document.getElementById('id03').style.display='none';
+        document.getElementById('id04').style.display='none';
+        document.getElementById('id05').style.display='none';
+        document.getElementById('id06').style.display='none';
+        var a = document.getElementById("pickup").value;
+        if(a=="Yes")
+        document.getElementById('idpickup').style.display='block';
+        else
+        document.getElementById('idpickup').style.display='none';
+
+
+
+    }
+    function m3()
+    {
+        document.getElementById('id01').style.display='none';
+        document.getElementById('id02').style.display='none';
+        document.getElementById('id03').style.display='block';
+        document.getElementById('id04').style.display='none';
+        document.getElementById('id05').style.display='none';
+        document.getElementById('id06').style.display='none';
+        var a = document.getElementById("idddrop").value;
+        if(a=="Yes")
+        document.getElementById("03").style.display='block';
+        else
+        document.getElementById("03").style.display='none';
+
+    }
+    function m4()
+    {document.getElementById('id01').style.display='none';
+        document.getElementById('id02').style.display='none';
+        document.getElementById('id03').style.display='none';
+        document.getElementById('id04').style.display='block';
+        document.getElementById('id05').style.display='none';
+        document.getElementById('id06').style.display='none';
+
+    }
+    function m5()
+    {
+        
+        document.getElementById('id01').style.display='none';
+        document.getElementById('id02').style.display='none';
+        document.getElementById('id03').style.display='none';
+        document.getElementById('id04').style.display='none';
+        document.getElementById('id05').style.display='block';
+        document.getElementById('id06').style.display='none';
+    }
+    function m6()
+    {
+        
+        document.getElementById('id01').style.display='block';
+        document.getElementById('id02').style.display='block';
+        document.getElementById('id03').style.display='block';
+        document.getElementById('id04').style.display='block';
+        document.getElementById('id05').style.display='block';
+        document.getElementById('id06').style.display='block';
+    }
+          
+                       
+                       </script>
+            <script>
+                    function myFunction1()
+                    {
+                    var x = document.getElementById("mySelect1").value;
+                    document.getElementById("demo1").value = x;
+                    }
+                    </script>
+<script>
+        function myFunction() {
+        var x = document.getElementById("mySelect").value;
+        document.getElementById("demo").value = x;
+        }
+        </script>
+</body>
+
+    <script src="javascripts/jquery.min.js" type="text/javascript"></script>
+	<script src="javascripts/bootstrap.min.js" type="text/javascript"></script>
+
+	
+	<script src="javascripts/bootstrap-checkbox-radio.js"></script>
+
+	<script src="javascripts/chartist.min.js"></script>
+
+    <script src="javascripts/bootstrap-notify.js"></script>
+
+  
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+	<script src="javascripts/paper-dashboard.js"></script>
+
+	
+	<script src="javascripts/demo.js"></script>
+
+
+</html>
