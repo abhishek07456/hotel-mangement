@@ -38,25 +38,20 @@
                 <ul class="nav">
                  
                     <li class="active">
-                        <a href="/bringo/inbox">
+                        <a href="/bringo/profile">
                             <i class="ti-panel"></i>
-                            <p>inbox</p>
+                            <p>profile</p>
                         </a>
                     </li>
                    
                     <li>
-                        <a href="/bringo/faculty">
+                        <a href="/bringo/addWorker">
                             <i class="ti-panel"></i>
-                            <p>Add Faculty</p>
+                            <p>Add Driver</p>
                         </a>
                     </li>
                  
-                    <li >
-                        <a href="/bringo/arrangement">
-                            <i class="ti-panel"></i>
-                            <p>visitor Arrangement</p>
-                        </a>
-                    </li>
+            
                 </ul>
             </div>
         </div>
@@ -71,7 +66,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Requestor</a>
+                    <a class="navbar-brand" href="#">Transport details</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -107,64 +102,73 @@
                 </div>
             </div>
         </nav>
-      
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title"><font color="orange">Requestor Details</font><i class="ti-filter"></i></h4><br>
-                                <input type="text" id="myInput" class="form-control border-input" onkeyup="myFunction()" placeholder="Search by name.." title="Type in a name">
-                              
-                           
-                                <div class="content table-responsive table-full-width">
-                                       <table class="table table-striped" id="myTable">
-                                       <thead>
-                                        <th>department</th>
-                                        <th>name</th>
-                                        <th>email</th>
-                                        <th>date</th>
-                                        <th>arrangement</th>
-                                        <th>Delete Record</th>
-                                       
-                                    </thead>
-                                    <tbody>
-                                        <% for(var i=0; i < data.length; i++) { %>
-                                       <tr>
-                                
-                                         <td><%= data[i].department%></td>
-                                         <td><%= data[i].requestername%></td>
-                                         <td><%= data[i].requesteremail%></td>
-                                         <td><%= data[i].requesterdate%></td>
-                                         <td><a href="/bringo/visitorAdmin?email=<%= data[i].requesteremail%>&date=<%= data[i].requesterdate%>">click</a></td>
-                                         <td><a href="/bringo/request/delete?id=<%=data[i]._id%>">delete</a></td>
-                                         
-                                
-                                       </tr>
-                                    <% } %>
-                                      </tbody>
-                                
-                                    </table>
-                                
+        <div class="col-lg-11 col-md-9">
+            <div class="card">
+                <div class="header">
+                        <h4 class="title"><font color="orange"> Admin Details</font> <i class="ti-user"></i></h4><br>
+                </div>
+                <div class="content">
+                        <form action="/bringo/transport-admin-details" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <label>User-Name</label>
+                                        <input type="text"  name="TadminUserName"  placeholder="User Name" class="form-control border-input" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <label>Email id</label>
+                                        <input type="email"   name="TadminEmail" placeholder="email"  class="form-control border-input">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text"  name="TadminName" id="dep" placeholder="Name"  class="form-control border-input" required>
+                                </div>
+                            </div>
+                      
 
+                       
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                        <label>contact</label>
+                                        <input type="text"  placeholder="Phoneno" name="TadminPhoneno"  pattern="[6789][0-9]{8}" class="form-control border-input" required>
+                                </div>
+                            </div>
+                            
+             
+                           
+                             
+                                <div class="col-md-4">
+                                        <div class="form-group">
+                                                <label>Update password</label>
+                                                <input type="password"   name="TadminPassword" placeholder="new password" class="form-control border-input">
+                                        </div>
                                     </div>
+                              
+                                
                         </div>
-                    </div>
+
+                        <input type="submit" class="btn btn-info btn-fill btn-wd"   value="change details"  >
+                    </form>
                 </div>
             </div>
         </div>
+
+
     </div>
+</div>
+</div>
 
                    
+       
 
-     
 
-<!----footer-------------------------------------->
-<footer class="footer">
-    <div class="container-fluid">
-    
-    </div>
+
+</div>
+      
 </footer>
 <!----footer-------------------------------------->
 </body>

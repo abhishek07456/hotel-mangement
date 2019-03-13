@@ -31,6 +31,10 @@ const addWorker=function(req,res){
   res.render('addWorker.ejs', { title: 'Express' })
 
 };
+const transport=function(req,res){
+  res.render('transport.ejs', { title: 'Express' })
+
+};
 
 module.exports={
     request,
@@ -40,6 +44,7 @@ module.exports={
     records,
     guestRecords,
     faculty,
-    addWorker
+    addWorker,
+    transport
     
 };

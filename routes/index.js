@@ -35,6 +35,7 @@ router.post('/bringo/faculty/add', function(req, res, next) {
      });
   });
 });
+
 router.get('/bringo/faculty/delete', function(req, res, next) {
  
   var id = req.query.id;
@@ -51,6 +52,7 @@ router.get('/bringo/faculty/delete', function(req, res, next) {
        }
     });
   });
+  
 });
 router.get('/bringo/request/delete', function(req, res, next) {
  
@@ -68,6 +70,7 @@ router.get('/bringo/request/delete', function(req, res, next) {
        }
     });
   });
+  
 });
 router.get('/bringo/record/delete', function(req, res, next) {
  
@@ -85,8 +88,9 @@ router.get('/bringo/record/delete', function(req, res, next) {
        }
     });
   });
+
 });
-router.get('/bringo/faculty', function(req, res) {
+router.get('/bringo/faculty', function(req, res,next) {
 
   MongoClient.connect(dburl, function(err, db) {
     if(err) {  console.log(err); throw err;  }
@@ -97,9 +101,10 @@ router.get('/bringo/faculty', function(req, res) {
       db.close();
     });
   });
+ 
 });
 
-router.get('/bringo/arrangement', function(req, res) {
+router.get('/bringo/arrangement', function(req, res,next) {
 
   MongoClient.connect(dburl, function(err, db) {
     if(err) {  console.log(err); throw err;  }
@@ -110,8 +115,9 @@ router.get('/bringo/arrangement', function(req, res) {
       db.close();
     });
   });
+
 });
-router.get('/bringo/record', function(req, res) {
+router.get('/bringo/record', function(req, res,next) {
   var k= req.param('email');
  
   console.log(k);
@@ -126,9 +132,10 @@ router.get('/bringo/record', function(req, res) {
       db.close();
     });
   });
+  
 });
 //render requestor data
-router.get('/bringo/inbox', function(req, res) {
+router.get('/bringo/inbox', function(req, res,next) {
 
   MongoClient.connect(dburl, function(err, db) {
     if(err) {  console.log(err); throw err;  }
@@ -139,10 +146,11 @@ router.get('/bringo/inbox', function(req, res) {
       db.close();
     });
   });
+
 });
 //
 
-router.get('/bringo/visitorAdmin', function(req, res) {
+router.get('/bringo/visitorAdmin', function(req, res,next) {
   var k= req.param('email');
   var d= req.param('date');
   console.log(k);
@@ -156,6 +164,26 @@ router.get('/bringo/visitorAdmin', function(req, res) {
       res.render('visitordetailsadmin.ejs', {data: docs});
       db.close();
     });
+  });
+  
+});
+router.post('/bringo/transport/pickup', function(req, res, next) {
+  var n = req.params.noofvisitors;
+  var ad=req.params.arrivaldate;
+  var at=req.params.arrivaltime;
+  var c=req.params.companyName;
+console.log(n);
+  MongoClient.connect(dburl, function(err, db) {
+    if(err) { throw err;  }
+    var collection = db.collection('pickup');
+    var product = { companyName:c, noofvisitors: n,  arrivaldate: ad,  arrivaltime: at};
+    
+   
+    collection.insert(product, function(err, result) {
+    if(err) { throw err; }
+      db.close();
+     res.redirect('/bringo/inbox');
+     });
   });
 });
 
@@ -240,7 +268,7 @@ router.post('/bringo/send', (req, res, next) => {
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
       res.render('login');
   });
-next();
+
   });
   router.post('/bringo/send',vis.visitor);
 
@@ -270,7 +298,7 @@ router.post('/bringo/login', (req, res,next) => {
      console.log(err);
    });  
  res.render('otp.ejs');
- next()
+
  });
  
 
@@ -305,7 +333,7 @@ router.post('/bringo/adminlogin', (req, res,next) => {
      console.log(err);
    });  
  res.render('otp1.ejs');
- next()
+
  });
  
 //router.post('/bringo/otp', login.loginfaculty);
@@ -316,6 +344,6 @@ router.post('/bringo/otp1', (req, res) => {
   res.render('login');
 });
 
-
+router.get('/bringo/transport',cntrl.transport);
 
 module.exports = router;

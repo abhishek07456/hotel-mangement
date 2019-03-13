@@ -88,7 +88,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                                 <label>Date</label>
-                                    <input type="date" name="requesterdate" class="form-control border-input" required>
+                                    <input type="date" name="requesterdate" min="fun()"  class="form-control border-input" required>
                                         </div>
                                     </div>
                                     
@@ -118,7 +118,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                                 <label>title *</label>
-                                                <input type="text"  name="title" placeholder="title" class="form-control border-input" >
+                                                <input type="text"  name="title" placeholder="title" class="form-control border-input" required>
                                                 
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                             <div class="form-group">
                                                     <label>phone No *</label>
 
-                                     <input type="text"  name="contact" pattern="[0-9]{10,10}"" placeholder="phone no" class="form-control border-input" required>
+                                     <input type="text"  name="contact" pattern="[0-9]{10,10}" placeholder="phone no" class="form-control border-input" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -146,7 +146,8 @@
     
 
 <!---------------------------------------------------------------------------------------DIV TAG WITH ID 02----------------------------------------------------------------------------------------------------------------->
-<div id='id02' >
+
+<div id='id02' style="display: none">
         <div class="col-lg-11 col-md-10">
                 <div class="card">
                     <div class="header">
@@ -155,21 +156,30 @@
                     <div class="content">
                            
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                             <label>No of Visitors</label>
                 <input type="text" id="NoOfVisitors" name="noofvisitors" onchange="addFields(this.value)" class="form-control border-input" required>
           <!---->       </div>
       
                               </div>
-                              <div class="col-md-4">
-                                    <div id="containers" class="form-group"></div>
+                              <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label>Company Name</label>
+                <input type="text"  name="companyName" class="form-control border-input" required>
+          <!---->       </div>
+      
+                              </div>
+                              <div class="col-md-4" id="containers">
+                                   
+                                    
+                                    
                               </div>
                               
                               <div class="col-md-4">
                                     <div class="form-group">
                                             <label>Arrival date </label>
-                                            <input type="date"   name="arrivaldate" placeholder="date"  class="form-control border-input" required>
+                                            <input type="Date"    name="arrivaldate" placeholder="date"  class="form-control border-input" required>
       
                                      </div>
                                     </div>
@@ -184,14 +194,14 @@
                                     <div class="form-group">
                                           
                                             <label>Deaparture Date :</label>
-                                            <input type="date"  name="departuredate" placeholder="deaparture date" class="form-control border-input" >
+                                            <input type="date"  id="userdate" onchange="TDate()"  name="departuredate" placeholder="deaparture date" class="form-control border-input" required>
       
                               </div>
                             </div>
                               <div class="col-md-4">
                                     <div class="form-group">
                                             <label>Deaparture time :</label>
-                 <input type="time"  name="departuretime" placeholder="deaparture time" class="form-control border-input" ><br>
+                 <input type="time"  name="departuretime" placeholder="deaparture time" class="form-control border-input" required><br>
       
                               </div>
                             </div>
@@ -201,91 +211,76 @@
 </div>
 </div>
 <!-------------------------------------------------DIV TAG WITH ID 03-------------------------------------------------------------------------------->
-       <div id='id03' style="display: none">
-          <!---->  <div class="col-lg-11 col-md-9">
-                    <div class="card">
-                        <div class="header">
-                                <h4 class="title"><font color="orange">pick up Details</font> <i class="ti-exchange-vertical"></i></h4><br>
-                        </div>
-                        <div class="content">
-                                
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                                <label>pick Required</label>
-
-              <select name="pickupreq"  class="form-control border-input"> 
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-            <option value="if later">if later</option>
-                  </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                            <div class="form-group">
-                                                    <label>pick info</label>
-    
-                                                    <input list="pickupinfo" name="pickupinfo"  class="form-control border-input">
-                                 <datalist id="pickupinfo">
-                                 <option value="Chandigarh Airport">
-                                     <option value="Chandigarh Railway">
-                                 <option value="Rajpura Railway station">
-                                 <option value="Ambala cantt Railway station">
-                         </datalist>
-                                            </div>
-                                        </div>
-                                    
-                                    
-                        </div>
-                    </div>
+      
+        
+<div id='id03' style="display: none">
+        <div class="col-lg-11 col-md-6">
+                  <div class="card">
+                      <div class="header">
+                              <h4 class="title"><font color="orange">pick up details</font> <i class="ti-exchange-vertical"></i></h4><br>
+                      </div>
+                      <div class="content">
+                              
+                              <div class="row">
+                                  
+                            
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                              <label>pickup Required :</label>
+                                              <select name="pickupreq"   class="form-control border-input" id="pickup" onchange="changeState()" > 
+                                              <option value="Yes">Yes</option>
+                                              <option value="No">No</option>
+                                   </select>
+        
+                                </div>
+                              </div>
+                              <img src="image/car.jpg">      
+             <div id="idpickup" >
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                              <label>pickup location :</label>
+                                  <input type="text" name="pickupinfo"  placeholder="location"  class="form-control border-input" > 
+                                           </div></div>
                 </div>
-    
-    
-            </div><!---->
-              
+           </div>
+       </div>
+          
+          
+</div>
+</div><!--end----------------------->
 
-             <!---->  <div class="col-lg-11 col-md-9">
-                    <div class="card">
-                            <div class="header">
-                                    <h4 class="title"><font color="orange">Drop up Details</font> <i class="ti-exchange-vertical"></i></h4><br>
-                            </div>
-                            <div class="content">
-                                    
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                    <label>Drop Required</label>
-    
-                  <select name="dropreq"  class="form-control border-input"> 
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-                <option value="if later">if later</option>
-                      </select>
-                                            </div>
-                                        </div>
-    
-                                        <div class="col-md-6">
-                                                <div class="form-group">
-                                                        <label>Drop info</label>
-        
-                                                        <input list="dropinfo" name="dropinfo"  class="form-control border-input">
-                                     <datalist id="dropinfo">
-                                     <option value="Chandigarh Airport">
-                                         <option value="Chandigarh Railway">
-                                     <option value="Rajpura Railway station">
-                                     <option value="Ambala cantt Railway station">
-                             </datalist>
-                                                </div>
-                                            </div>
-                                        
-                                        
-                            </div>
-                        </div>
+<div class="col-lg-11 col-md-6">
+      <div class="card">
+          <div class="header">
+                  <h4 class="title"><font color="orange">Drop details</font> <i class="ti-exchange-vertical"></i></h4><br>
+          </div>
+          <div class="content">
+                  
+                  <div class="row">
+                      
+                
+                      <div class="col-md-4">
+                          <div class="form-group">
+                                  <label>Drop Required :</label>
+                                  <select name="dropreq"   class="form-control border-input" id="dropup" onchange="changeState1()" > 
+                                  <option value="Yes">Yes</option>
+                                  <option value="No">No</option>
+                       </select>
+
                     </div>
-        
-        
-                </div><!---->
+                  </div>
+                  <img src="image/car.jpg">      
+ <div id="iddrop" >
+                      <div class="col-md-4">
+                          <div class="form-group">
+                                  <label>Drop location :</label>
+                      <input type="text" name="dropinfo"  placeholder="location"  class="form-control border-input" > 
+                               </div></div>
+    </div>
+</div>
+</div>
+      </div></div>
+
 
                   <!---->  <div class="col-lg-11 col-md-9">
                         <div class="card">
@@ -295,17 +290,18 @@
                                 <div class="content">
                                         
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                         <label>meal Required</label>
         
-                      <select name="meal"  class="form-control border-input"> 
+                      <select name="meals"  class="form-control border-input"> 
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                     <option value="if later">if later</option>
                           </select>
                                                 </div>
                                             </div>
+                                           
         
                                            
                                             
@@ -333,6 +329,7 @@
              
 
 </body>
+<script src="javascripts/datecheck.js"></script>
 <script src="javascripts/request.js"></script>
     <script src="javascripts/jquery.min.js" type="text/javascript"></script>
 	<script src="javascripts/bootstrap.min.js" type="text/javascript"></script>
