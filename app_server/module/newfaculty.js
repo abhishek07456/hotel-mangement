@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const newfaculty = mongoose.Schema({ 
 
-    newfacultyname:{
+  newfacultyname:{
       type: String,
   },
   newfacultydepartement:{
@@ -15,9 +15,13 @@ const newfaculty = mongoose.Schema({
     newfacultyphoneno:{
       type: String,
    },
+   password:
+   {
+     type:String,
+   }
   
 
   
 })
 
-module.exports = mongoose.model('newfaculty',newfaculty);
+module.exports = mongoose.model('newfacultys',newfaculty);

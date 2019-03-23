@@ -6,8 +6,8 @@ const request =function(req,res){
     const requesters =[];
     for(var i=0;i<req.body.noofvisitors;i++){
         requesters.push({
-            firstname:eval(  "req.body.firstname"+i  ),
-            lastname:eval(  "req.body.lastname"+i  ),
+            visitorname:eval(  "req.body.visitorname"+i  ),
+            
             contact:   eval(  "req.body.contact"+i  ),
             email:    eval(  "req.body.email"+i  ),
         })
@@ -38,20 +38,22 @@ const request =function(req,res){
     requesterdate: req.body.requesterdate,
     department: req.body.department,
     requestername:  req.body.requestername,
+    requesteremail:  req.body.requesteremail,
     title:  req.body.title,
-    requestercontact:    req.body.requestercontact,
-    requesteraltcontact: req.body.requesteraltcontact,
-    requesteremail:      req.body.requesteremail,
+    contact:    req.body.contact,
+   altcontact: req.body.altcontact,
+    
     noofvisitors: req.body.noofvisitors,
-
+  companyName:req.body.companyName,
     
     arrivaldate: req.body.arrivaldate,
     arrivaltime: req.body.arrivaltime,
     
+    
+    departuredate: req.body.departuredate,
+    departuretime: req.body.departuretime,
     pickupreq: req.body.pickupreq,
     pickupinfo:  req.body.pickupinfo,
-    departuredate: req.body.departuredate,
-    depaerturetime: req.body.departuretime,
     dropreq: req.body.dropreq,
     dropinfo:  req.body.dropinfo,
     meals: req.body.meals,
@@ -63,7 +65,7 @@ const request =function(req,res){
                 .json(err);
         } else{
            res
-             .render('requestdetails.ejs');
+             .render('request.ejs');
         }
         
     });

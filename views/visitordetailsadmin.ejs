@@ -38,17 +38,16 @@
                     <center><button type="button" class="btn btn-info btn-fill btn-wd" onclick="m2()">Visitors details</button></li></center><br>
                     </li>
                     <li >
-                       <center> <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m3()">Transport details</button>    </center>  <br> 
+                       <center> <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m3()">Transport details</button></center>  <br> 
                     </li>
                     <li >
                        <center>  <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m4()">Meals</button></center><br>
                     </li>
                     <li >
-                      <center>  <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m5()">Accomodation</button>  </li></center> <br> 
+                      <center>  <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m5()">Room details</button>  </li></center> <br> 
                     </li>
-                    <li >
-                      <center>  <button type="button" class="btn btn-info btn-fill btn-wd" onclick="m6()">Confirm and Submit</button> </center>  <br>   
-                    </li>
+                    
+                   
                 </ul>
             </div>
         </div>
@@ -72,7 +71,7 @@
 
 
   
-            <form action="/bringo/send" method="post">
+           
                 <!-------------------------------------------------------------------DIV TAG WITH ID 01 ---------------------------------------------------------------------------------->
     <div id='id01' >
             <div class="col-lg-11 col-md-10">
@@ -144,7 +143,7 @@
     
 
 <!---------------------------------------------------------------------------------------DIV TAG WITH ID 02----------------------------------------------------------------------------------------------------------------->
-
+<form action="/bringo/send" method="post">
 <div id='id02' style="display: none" >
         <div class="col-lg-11 col-md-10">
                 <div class="card">
@@ -158,53 +157,51 @@
                                     <div class="form-group">
                                 
                                             <label>No of Visitors</label>
-                <input type="text"  name="noofvisitors" value="<%=data[0].noofvisitors %>"  class="form-control border-input" required disabled>
-          <!---->       </div>
+                <input type="text"  value="<%=data[0].noofvisitors%>" name="noofvisitors" class="form-control border-input"   readonly>
+                                  </div>
       
                               </div>
                               <div class="col-md-6">
                                     <div class="form-group">
                                             <label>company Name</label>
-                <input type="text"  name="companyName" value="<%=data[0].companyName %>"  class="form-control border-input" required disabled>
-          <!---->       </div>
+                <input type="text"   value="<%=data[0].companyName%>"  name="companyName" class="form-control border-input"  readonly>
+                          </div>
       
                               </div>
                               
                              <center> <h5><font color="orange">No of user</font></h5></center>
-                              <p ><font color="orange">---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</font></p>
-                              <% for(var i=0; i < data[0].Requester.length; i++) { %>
+                               <% for(var i=0; i < data[0].Requester.length; i++) { %>
                                
                                 <div class="col-md-4">
                                         <div class="form-group">
                                         <label>person <%=i+1%> name</label> 
-                           <input type="text" name="firstname" class="form-control border-input" value='<%= data[0].Requester[i].visitorname %>' disabled>
+                           <input type="text"   class="form-control border-input" value="<%= data[0].Requester[i].visitorname %>" name="visitorname"readonly>
                                          </div>
                                 </div>
                                 <div class="col-md-4">
                                         <div class="form-group">
-                                           <label>person <%=i+1%> email</label> 
-                                         <input type="email" name="email" class="form-control border-input" value='<%= data[0].Requester[i].email %>' disabled>
+                                           <label>person <%=i+1%> email</label>  
+                                         <input type="email"     class="form-control border-input" value="<%= data[0].Requester[i].email %>" name="email" readonly>
                                          </div></div>
                                          <div class="col-md-4">
                                                 <div class="form-group">
                               <label>person <%=i+1%> contact</label>
-                              <input type="text" name="contact" class="form-control border-input" value='<%= data[0].Requester[i].contact %>' disabled>
+                              <input type="text"  class="form-control border-input" value='<%= data[0].Requester[i].contact %>'  name="contact"  readonly>
                                     </div></div>
                              <% } %>
-                             <p ><font color="orange">---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</font></p>
-
+ 
                               
                               <div class="col-md-3">
                                     <div class="form-group">
                                             <label>Arrival date </label>
-                                            <input type="Date"   value='<%= data[0].arrivaldate %>' name="arrivaldate" placeholder="date"  class="form-control border-input" required disabled>
+                                            <input type="Date"   value='<%= data[0].arrivaldate %>' name="arrivaldate" placeholder="date"  class="form-control border-input"   readonly>
       
                                      </div>
                                     </div>
                               <div class="col-md-3">
                                     <div class="form-group">
                                             <label>Arrival time</label>
-                                <input type="time"  value='<%= data[0].arrivaltime %>' name="arrivaltime" placeholder="date"  class="form-control border-input" required disabled>
+                                <input type="time"  value='<%= data[0].arrivaltime %>' name="arrivaltime" placeholder="date"  class="form-control border-input"  readonly>
       
                               </div>
                             </div>
@@ -212,14 +209,14 @@
                                     <div class="form-group">
                                           
                                             <label>Deaparture Date :</label>
-                                            <input type="date"  value='<%= data[0].departuredate %>'  name="departuredate" placeholder="deaparture date" class="form-control border-input" required disabled>
+                                            <input type="date"  value='<%= data[0].departuredate %>'  name="departuredate" placeholder="deaparture date" class="form-control border-input"   readonly>
       
                               </div>
                             </div>
                               <div class="col-md-3">
                                     <div class="form-group">
                                             <label>Deaparture time :</label>
-                 <input type="time" value='<%= data[0].departuretime %>'  name="departuretime" placeholder="deaparture time" class="form-control border-input" required disabled><br>
+                 <input type="time" value='<%= data[0].departuretime %>'  name="departuretime" placeholder="deaparture time" class="form-control border-input"  readonly><br>
       
                               </div>
                             </div>
@@ -255,15 +252,14 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                                 <label>pickup location :</label>
-                                    <input type="text" name="pickupinfo" value="<%=data[0].pickupinfo %>"  class="form-control border-input" disabled> 
-                                             </div></div><br>
-                                             <a href="/bringo/transport/pickup?companyName=<%= data[0].companyName%>&arrivaldate=<%= data[0].arrivaldate%>&arrivaltime=<%=data[0].arrivaltime%>&noofvisitors=<%=data[0].noofvisitors%>">request</a>
+                                    <input type="text" name="pickupinfo" value="<%=data[0].pickupinfo%>"  class="form-control border-input"  readonly> 
+                                             </div></div> 
+                                        
                                            
                   </div>
              </div>
          </div>
-            
-            s
+           
  </div>
   </div><!--end----------------------->
 
@@ -292,7 +288,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                     <label>Drop location :</label>
-                        <input type="text" name="dropinfo" value="<%=data[0].dropinfo %>"  class="form-control border-input" disabled> 
+                        <input type="text" name="dropinfo" value="<%=data[0].dropinfo %>"  class="form-control border-input" readonly> 
                                  </div></div><br>
 
                                
@@ -303,16 +299,123 @@
 
 </div>
 </div>
-       
-    </form><!--form end here-->
-  <input type="submit" class="btn btn-info btn-fill btn-wd"   value="submit"  >
+</div>
 
+       <!----------------------------------------------------------id with 4-------------------------------->
+    
+    
+    
+    
+       <div id='id04' style="display: none">
+        <div class="col-lg-11 col-md-6">
+                  <div class="card">
+                      <div class="header">
+                              <h4 class="title"><font color="orange">Meals details</font> <i class="ti-exchange-vertical"></i></h4><br>
+                      </div>
+                      <div class="content">
+                              
+                              <div class="row">
+                                  
+                            
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                              <label>Meals Required :</label>
+                                              <select name="meals"  value="<%=data[0].meals %>" class="form-control border-input" id="meal" onchange="changeState2()" > 
+                                              <option value="Yes">Yes</option>
+                                              <option value="No">No</option>
+                                   </select>
+                                      </div>
+                                  </div>
+                                   <div id="idmeal" >
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                                <label>meals details :</label>
+                                    <input type="text" name="mealDetail"  class="form-control border-input" > 
+                                             </div>
+                                            </div>
+                                        </div>
+            
+                                           
+                  </div>
+                                </div> 
+                              </div>
+                                
+             
+           </div>
+       </div>
+         
+<!--end----------------------->
+    
+    
+    
+    
+    
+    <!-----------------------------------------------------------------------end    ------------------------------>
+   <!-------------------------------div 5------------------------------------------------------> 
+   <div id='id05' style="display: none">
+    <div class="col-lg-11 col-md-6">
+              <div class="card">
+                  <div class="header">
+                          <h4 class="title"><font color="orange">room details</font> <i class="ti-exchange-vertical"></i></h4><br>
+                  </div>
+                  <div class="content">
+                          
+                          <div class="row">
+                              
+                        
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                          <label>Enter Block Name :</label>
+                                          <select name="blockname" class="form-control border-input" id="meal" onchange="changeState2()" > 
+                                            <option value="block1">block1</option>
+                                            <option value="block2">block2</option>
+                                 </select>
+                                          
+                                    
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                        <label>Enter room Number :</label>
+                                        <input type="text" name="roomNo"   class="form-control border-input"  > 
+                                        
+                                  
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                        <label>Enter room type :</label>
+                                        
+                                        <select name="roomtype" class="form-control border-input" id="meal" onchange="changeState2()" > 
+                                            <option value="AC">AC</option>
+                                            <option value="NON AC">NON AC</option>
+                                 </select>
+                                  
+                                </div>
+                            </div>
+                                
+        
+                                       
+          
+     
+</div>
+</div>
+</div>
+    </div>
+   </div>
+
+
+   
+     <input type="submit"   class="btn btn-info btn-fill btn-wd"   value="submit" >
+    </form> 
+ 
             
  </div>
     </div>
 
-                          
-             </form>
+    
+           
+            
 
         
              

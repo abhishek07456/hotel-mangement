@@ -11,10 +11,7 @@ const records=function(req,res){
   res.render('records.ejs', { title: 'Express' })
 
 };
-const loginFaculty=function(req,res){
-  res.render('loginFaculty.ejs', { title: 'Express' })
-
-};
+ 
 const login=function(req,res){
   res.render('login.ejs', { title: 'Express' })
 
@@ -31,20 +28,24 @@ const addWorker=function(req,res){
   res.render('addWorker.ejs', { title: 'Express' })
 
 };
-const transport=function(req,res){
-  res.render('transport.ejs', { title: 'Express' })
+const transportAdmin=function(req,res){
+  res.render('transportdetailsadmin.ejs', { title: 'Express' })
 
 };
+ 
+ 
+
 
 module.exports={
     request,
     visitorAdmin,
     login,
-    loginFaculty,
+    
     records,
     guestRecords,
     faculty,
     addWorker,
-    transport
+    transportAdmin,
+    
     
 };

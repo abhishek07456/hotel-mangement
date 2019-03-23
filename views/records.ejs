@@ -102,34 +102,27 @@
         <form action="/bringo/detail/edit" method="post">
         <table>
             <tr>
-                <th>Visitor Details</th>
-                <th></th>    
+                <th>visitors</th>
+                <th><%=data[0].noofvisitors %></th>    
             </tr>
             <tr>
-                <td>First Name</td>
-                <td><%=data[0].firstname %></td>    
+                <td>companyName</td>
+                <td><%=data[0].companyName %></td>    
             </tr>
             <tr>
-                <td>Last Name</td>
-                <td><%=data[0].lastname %></td>    
+                <td>visitorname</td>
+                <td><%=data[0].visitorname%></td>    
             </tr>
             <tr>
-                <td>Organisation</td>
-                <td><%=data[0].organisation%></td>    
+                <td> email</td>
+                <td><%=data[0].email%></td>    
             </tr>
             <tr>
                 <td>Contact</td>
                 <td><%=data[0].contact %></td>    
             </tr>
-            <tr>
-                <td>Alt Contact</td>
-                <td><%=data[0].altcontact %></td>    
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><%=data[0].email %></td>    
-            </tr>
-            <tr>
+             
+             
                 <td>Arrival Date</td>
                 <td><%=data[0].arrivaldate%></td>    
             </tr>
@@ -137,91 +130,48 @@
                 <td>Arrival Time</td>
                 <td><%=data[0].arrivaltime%></td>    
             </tr>
+        </tr>
+             
+             
+        <td>departure  Date</td>
+        <td><%=data[0].departuredate%></td>    
+    </tr>
+    <tr>
+        <td>departure time</td>
+        <td><%=data[0].departuretime%></td>    
+    </tr>
             <tr>
-                <td>Purpose</td>
-                <td><%=data[0].purpose%></td>    
-            </tr>
-            <tr>
-                <td>Pickup Info</td>
-                <td><%=data[0].pickupinfo%></td>    
+                <td>Pickup required</td>
+                <td><%=data[0].pickupreq %></td>    
             </tr>
             <tr>
                 <td>Pickup location</td>
-                <td><%=data[0].pickuplocation%></td>    
+                <td><%=data[0].pickupinfo %></td>    
             </tr>
             <tr>
                 <td>Transport Cordinator info</td>
-                <td><%=data[0].pickuptransportcoordinator%></td>    
+                <td>ABC</td>    
             </tr>
             <tr>
-                <td>Transport Cordinator No</td>
-                <td><%=data[0].pickuptransportcoordinatorphoneno%></td>    
-            </tr>
-            <tr>
-                <td>Pick Person No</td>
-                <td><%=data[0].pickuppersonphoneno%></td>    
-            </tr>
-            <tr>
-                <td>Pick Vehicle Info</td>
-                <td><%=data[0].pickupvehicletype%></td>    
-            </tr>
-            <tr>
-                <td>Pick capacity</td>
-                <td><%=data[0].pickupvehiclecapacity%></td>    
-            </tr>
-            <tr>
-                <td>Departure Date</td>
-                <td><%=data[0].departuredate%></td>    
-            </tr>
-            <tr>
-                <td>Drop required</td>
+                <td>drop required</td>
                 <td><%=data[0].dropreq%></td>    
             </tr>
             <tr>
-                <td>Drop loaction</td>
+                <td>drop location</td>
                 <td><%=data[0].dropinfo%></td>    
             </tr>
             <tr>
-                <td>drop transport coordinator</td>
-                <td><%=data[0].droptransportcoordinator%></td>    
+                <td>room no</td>
+                <td><%=data[0].roomNo%></td>    
             </tr>
             <tr>
-                <td>drop person phoneno</td>
-                <td><%=data[0].droppersonphoneno%></td>    
+                <td>block Name</td>
+                <td><%=data[0].blockname%></td>    
             </tr>
             <tr>
-                <td>Drop Vehicle Info</td>
-                <td></td>    
+                <td>Room type</td>
+                <td><%=data[0]. roomtype%></td>    
             </tr>
-            <tr>
-                <td>Drop Accompanied By</td>
-                <td></td>    
-            </tr>
-            <tr>
-                <td>Room Type</td>
-                <td></td>    
-            </tr>
-            <tr>
-                <td>Room Number</td>
-                <td></td>    
-            </tr>
-            <tr>
-                <td>Building Name</td>
-                <td></td>    
-            </tr>
-            <tr>
-                <td>Check-In Date</td>
-                <td></td>    
-            </tr>
-            <tr>
-                <td>Check-Out Date</td>
-                <td></td>    
-            </tr>
-            <tr>
-                <td>Helper Person Info</td>
-                <td></td>    
-            </tr>
-           
           </table><br/><br>
          <center> <input type="submit" class="btn btn-info btn-fill btn-wd"   value="Edit"  ></center>
         </form>

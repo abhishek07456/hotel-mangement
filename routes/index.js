@@ -4,45 +4,80 @@ var mongodb     = require('mongodb');
 const nodemailer=require('nodemailer');
 var otpGenerator = require('otp-generator')
 var passport = require('passport');
-var x; 
+
 var MongoClient = mongodb.MongoClient;
 dburl='mongodb://bringo:Bringofs8@ds227243.mlab.com:27243/bringo';
 var requ=require('../app_server/controllers/requestdetails');
 var vis=require('../app_server/controllers/visitordetails');
 var login=require('../app_server/controllers/logins')
+var faculty=require('../app_server/controllers/newfacultys');
 var cntrl=require('./controllers/main');
 
 router.post('/bringo/request',requ.request);
 router.get('/bringo/request',cntrl.request);
 router.get('/bringo/addWorker',cntrl.addWorker);
-//router.get('/bringo/visitorAdmin',cntrl.visitorAdmin);
+ 
+ 
 router.get('/bringo/login',cntrl.login);
-router.get('/bringo/loginFaculty',cntrl.loginFaculty);
+ 
 
 router.get('/bringo/guestRecords',cntrl.guestRecords);
+router.post('/bringo/faculty/add',faculty.request);
 
-router.post('/bringo/faculty/add', function(req, res, next) {
+router.get('/bringo/transportdetailsadmin',cntrl.transportAdmin);
+ 
+router.post('/bringo/send',vis.visitor);
+router.get( '/bringo/transportinbox', function(req, res,next) {
+
   MongoClient.connect(dburl, function(err, db) {
-    if(err) { throw err;  }
-    var collection = db.collection('faculty');
-    var product = {  newfacultyname: req.body.newfacultyname,  newfacultydepartement: req.body.newfacultydepartement,  newfacultyemail: req.body.newfacultyemail,  newfacultyphoneno: req.body.newfacultyphoneno};
-    
-   
-    collection.insert(product, function(err, result) {
-    if(err) { throw err; }
+    if(err) {  console.log(err); throw err;  }
+    data = '';
+    var query = { $or: [ { pickupreq: "Yes" }, { dropreq: "Yes" } ] };
+    //var query = {$and : [{delete :true} ,{$or : [ { pickupreq: "Yes" }, { dropreq: "Yes" } ]} ]};
+    db.collection('visitordetails').find(query).toArray(function(err, docs){
+      if(err) throw err;
+       
+      res.render('transportinbox.ejs', {data: docs});
       db.close();
-     res.redirect('/bringo/faculty');
-     });
+    });
   });
+ 
+});
+ var id;
+router.get( '/bringo/transport_details', function(req, res,next) {
+  id=new mongodb.ObjectID(req.query.id)
+   
+
+  res.render('transport_details.ejs');
+  next();
 });
 
+ 
+router.post( '/bringo/transport_details', function(req, res,next) {
+  MongoClient.connect(dburl, function(err, db) {
+    if(err) { throw err;  }
+
+    db.collection('visitordetails').update(
+      {_id:id},
+      {
+        $set:{
+          vehicleNo:req.body.vehicleNo,
+          driverName:req.body.driverName,
+          driverPhoneNo:req.body.driverPhoneNo,
+          status:"Done",
+          delete:req.body.delete
+             }
+      });
+    res.redirect('/bringo/transportinbox');
+  });
+ });
 router.get('/bringo/faculty/delete', function(req, res, next) {
  
   var id = req.query.id;
   MongoClient.connect(dburl, function(err, db) {
     if(err) { throw err;  }
 
-    db.collection('faculty', function(err, products) {
+    db.collection('newfacultys', function(err, products) {
       products.deleteOne({_id: new mongodb.ObjectID(id)});
       if (err){
          throw err;
@@ -95,7 +130,7 @@ router.get('/bringo/faculty', function(req, res,next) {
   MongoClient.connect(dburl, function(err, db) {
     if(err) {  console.log(err); throw err;  }
     data = '';
-    db.collection('faculty').find().toArray(function(err, docs){
+    db.collection('newfacultys').find().toArray(function(err, docs){
       if(err) throw err;
       res.render('adduser.ejs', {data: docs});
       db.close();
@@ -118,15 +153,15 @@ router.get('/bringo/arrangement', function(req, res,next) {
 
 });
 router.get('/bringo/record', function(req, res,next) {
-  var k= req.param('email');
+  var id1= req.query.id;
  
-  console.log(k);
+ 
   
   MongoClient.connect(dburl, function(err, db) {
     if(err) {  console.log(err); throw err;  }
     data = '';
-    var query = { email:k};
-    db.collection('visitordetails').find(query).toArray(function(err, docs){
+    
+    db.collection('visitordetails').find({_id: new mongodb.ObjectID(id1)}).toArray(function(err, docs){
       if(err) throw err;
       res.render('records.ejs', {data: docs});
       db.close();
@@ -167,25 +202,7 @@ router.get('/bringo/visitorAdmin', function(req, res,next) {
   });
   
 });
-router.post('/bringo/transport/pickup', function(req, res, next) {
-  var n = req.params.noofvisitors;
-  var ad=req.params.arrivaldate;
-  var at=req.params.arrivaltime;
-  var c=req.params.companyName;
-console.log(n);
-  MongoClient.connect(dburl, function(err, db) {
-    if(err) { throw err;  }
-    var collection = db.collection('pickup');
-    var product = { companyName:c, noofvisitors: n,  arrivaldate: ad,  arrivaltime: at};
-    
-   
-    collection.insert(product, function(err, result) {
-    if(err) { throw err; }
-      db.close();
-     res.redirect('/bringo/inbox');
-     });
-  });
-});
+ 
 
 //-----
 router.post('/bringo/send', (req, res, next) => {
@@ -220,7 +237,7 @@ router.post('/bringo/send', (req, res, next) => {
     service: 'gmail',
     auth: {
         user: 'abhishek07456@gmail.com', // generated ethereal user
-        pass: '#2696@Abhishek'  // generated ethereal password
+        pass: '#6962@Abhishek'  // generated ethereal password
        },
 
     tls:{
@@ -270,80 +287,21 @@ router.post('/bringo/send', (req, res, next) => {
   });
 
   });
-  router.post('/bringo/send',vis.visitor);
+  
 
-//otp
-router.post('/bringo/login', (req, res,next) => {
-  let sendMsg = require('aws-sns-sms');
-   let awsConfig = {
-   accessKeyId: 'AKIAJTTLSA36GASEHT6A',
-   secretAccessKey: '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',
-   region: 'us-east-1'
-   };
-  
-   x= otpGenerator.generate(6, { upperCase: false, specialChars: false ,alphabets: false });
-  
-   let msg = {
-     "message": "your OTP is " +x,
-     "sender": "Prabal",
-     "phoneNumber":  `${req.body.contactNumber}`// phoneNumber along with country code
-  
-   };
-  
-   sendMsg(awsConfig, msg).then(data => {
-     console.log("Message sent");
-     console.log(x);
-   })
-   .catch(err => {
-     console.log(err);
-   });  
- res.render('otp.ejs');
-
- });
+ 
  
 
-router.post('/bringo/otp', (req, res) => {
-  if(x==`${req.body.otp}`)
-    res.render('request');
-  else
-  res.render('loginFaculty');
-});
-router.post('/bringo/adminlogin', (req, res,next) => {
-  let sendMsg = require('aws-sns-sms');
-   let awsConfig = {
-   accessKeyId: 'AKIAJTTLSA36GASEHT6A',
-   secretAccessKey: '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',
-   region: 'us-east-1'
-   };
-  
-   x= otpGenerator.generate(6, { upperCase: false, specialChars: false ,alphabets: false });
-  
-   let msg = {
-     "message": "your OTP is " +x,
-     "sender": "Prabal",
-     "phoneNumber":  `${req.body.contactNumber}`// phoneNumber along with country code
-  
-   };
-   console.log(req.body.contactNumber);
-   sendMsg(awsConfig, msg).then(data => {
-     console.log("Message sent");
-     console.log(x);
-   })
-   .catch(err => {
-     console.log(err);
-   });  
- res.render('otp1.ejs');
+ /*
+router.post( '/bringo/Auth', function(req, res,next) {
+  var email=req.body.email;
+  var usertype=req.body.usertype;
+  var password=req.body.password;
+     if(usertype="faculty")
+     {
 
- });
- 
-//router.post('/bringo/otp', login.loginfaculty);
-router.post('/bringo/otp1', (req, res) => {
-  if(x==`${req.body.otp}`)
-  res.redirect('/bringo/inbox');
-  else
-  res.render('login');
+     }
 });
-
-router.get('/bringo/transport',cntrl.transport);
+*/
 
 module.exports = router;

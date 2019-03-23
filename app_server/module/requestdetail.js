@@ -4,78 +4,103 @@ const Schema = mongoose.Schema;
 const requestdetails = mongoose.Schema({ 
 
   requesterdate:{
-      type: String,
+      type:String,
+      required:true,
+  
   },
     department:{
       type: String,
+      required:true,
     },
     requestername:{ 
       type: String,
+      required:true,
     },
-    contact:{
-      type: String,
-   },
+    requesteremail:{
+        type:String,
+        required:true,
+     },
+  
    title:{
     type: String,
+    required:true,
+ },
+ contact:{
+    type: String,
+    required:true,
  },
    altcontact:{
       type: String,
+      required:true,
    },
-   requesteremail:{
-      type:String,
-   },
+   
    noofvisitors:{
     type: String,
+    required:true,
 },
  
+companyName:{
+    type: String,
+    required:true,
+},
+
 
 Requester:[
     {
-        firstname:{
+        visitorname:{
     type: String,
-},
-lastname:{
-    type: String,
+    required:true,
 },
 
 contact:{
     type: String,
+    required:true,
 },
 
 email:{
     type: String,
+    required:true,
 }
 }],
 
 arrivaldate:{
     type: String,
+    required:true,
 },
 arrivaltime:{
     type: String,
+    required:true,
 },
 
- 
-pickupreq:{
-    type: String,
-},
-pickupinfo:{
-    type: String,
-},
+
 
 departuredate:{
     type: String,
+    required:true,
 },
 departuretime:{
     type: String,
+    required:true,
+},
+pickupreq:{
+    type: String,
+    required:true,
+},
+pickupinfo:{
+    type: String,
+
 },
 dropreq:{
     type: String,
+    required:true,
 },
 dropinfo:{
     type: String,
+  
 },
 meals: {
   type: String,
+  required:true,
 },
 
   

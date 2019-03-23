@@ -1,13 +1,13 @@
 const mongoose =require('mongoose');
-const requestu =mongoose.model('requestdetail');
-const newfaculty =function(req,res){
+const requestu =mongoose.model('newfacultys');
+const request =function(req,res){
 
     requestu.create({
-    requesterdate: req.body.requesterdate,
-    department: req.body.department,
-    requestername:  req.body.requestername,
-    title:  req.body.title,
-  
+        newfacultyname: req.body.newfacultyname,  
+        newfacultydepartement: req.body.newfacultydepartement, 
+         newfacultyemail: req.body.newfacultyemail, 
+          newfacultyphoneno: req.body.newfacultyphoneno,
+          password:req.body.password
     },(err,user) =>{
         if(err){
             res
@@ -15,7 +15,7 @@ const newfaculty =function(req,res){
                 .json(err);
         } else{
            res
-             .render('login.ejs');
+             .redirect('/bringo/faculty');
         }
         
     });
